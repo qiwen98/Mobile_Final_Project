@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "278997342189",
+    "firebase_url": "https://logintesting-c16cb.firebaseio.com",
+    "project_id": "logintesting-c16cb",
+    "storage_bucket": "logintesting-c16cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278997342189:android:1af2ea6a2b37f61fedf9e4",
+        "android_client_info": {
+          "package_name": "com.example.logintesting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "278997342189-6g0i0eds6ihukt4f60c7eothud5sr5c1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.logintesting",
+            "certificate_hash": "71a42e94aa430ad83349a30bc3afcf2dbc797056"
+          }
+        },
+        {
+          "client_id": "278997342189-gm7id8l710uon3emqbfu1ffjqmomj89b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcecO2N9hvDhIr7ktMfxedFdMcZhZzuWA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "278997342189-gm7id8l710uon3emqbfu1ffjqmomj89b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
