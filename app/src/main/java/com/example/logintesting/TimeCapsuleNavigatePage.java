@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
     private CollectionReference TimeCapsuleRef=db.collection("TimeCapsuleBook");
     private TimeCapsuleAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,8 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
         adapter=new TimeCapsuleAdapter(options);
         RecyclerView recyclerView=findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+      // recyclerView.setLayoutManager(new LinearLayoutManager(this));
+         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
@@ -75,7 +79,12 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
                 String id=documentSnapshot.getId();
                 String path=documentSnapshot.getReference().getPath();
                 String title=timeCapsule.getTitle();
+                String VideoURL=timeCapsule.getVideoDownloadURL();
                 Toast.makeText(TimeCapsuleNavigatePage.this,"Position: "+position+" and ID "+id+" and Title "+title,Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(TimeCapsuleNavigatePage.this, PlayerActivity.class);
+                intent.putExtra("Video_URL", VideoURL);
+                startActivity(intent);
 
             }
         });

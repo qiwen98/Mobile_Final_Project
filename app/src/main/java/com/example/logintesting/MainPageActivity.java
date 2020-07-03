@@ -32,6 +32,8 @@ public class MainPageActivity extends AppCompatActivity {
     TextView Verify_Msg_TextView,NameView,EmailView;
     ImageView profileImage;
     private StorageReference mStorageRef;
+    Button TimeCapsule_but;
+
 
     private static final String TAG = "MainPageActivity";
     @Override
@@ -44,6 +46,7 @@ public class MainPageActivity extends AppCompatActivity {
         EmailView=(TextView)findViewById(R.id.EmailView);
         NameView=(TextView)findViewById(R.id.NameView);
         profileImage=(ImageView) findViewById(R.id.PhotoView);
+        TimeCapsule_but = (Button) findViewById(R.id.TimeCapsule);
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
 
@@ -55,6 +58,13 @@ public class MainPageActivity extends AppCompatActivity {
                 //open gallery
                 Intent openGalleryIntent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(openGalleryIntent,1000);
+            }
+        });
+
+        TimeCapsule_but.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              gototimecapsulepage();
             }
         });
     }
@@ -148,5 +158,11 @@ public class MainPageActivity extends AppCompatActivity {
         }
 
         // [END get_user_profile]
+    }
+
+    private void gototimecapsulepage()
+    {
+        Intent intent=new Intent(MainPageActivity.this, TimeCapsuleNavigatePage.class);
+        startActivity(intent);
     }
 }

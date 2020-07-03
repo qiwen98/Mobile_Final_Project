@@ -32,4 +32,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+    <ImageButton
+        android:id="@+id/ImageUpload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_upload_photo" />
+
+    <ImageButton
+        android:id="@+id/VideoUpload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_upload_video" />
+
 </androidx.appcompat.widget.LinearLayoutCompat>

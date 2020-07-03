@@ -88,4 +88,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/EmailView" />
 
+    <Button
+        android:id="@+id/TimeCapsule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="157dp"
+        android:layout_marginEnd="159dp"
+        android:layout_marginBottom="146dp"
+        android:text="TimeCapsule"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NameView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
