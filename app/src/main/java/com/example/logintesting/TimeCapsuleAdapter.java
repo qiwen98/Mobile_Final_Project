@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.firebase.ui.firestore.ObservableSnapshotArray;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
@@ -42,11 +45,12 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.media.CamcorderProfile.get;
 
-public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,TimeCapsuleAdapter.TimeCapsuleHolder> {
+public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,TimeCapsuleAdapter.TimeCapsuleHolder> implements Filterable {
 
     /**
      * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
@@ -56,13 +60,23 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
      */
 
     private  Context context;
-    private  List<TimeCapsule>timeCapsuleList;
+    private  List<TimeCapsule>timeCapsuleList,timeCapsuleFilteredList;
+
+
+    private boolean isFiltarable;
     String TAG="TimeCapsuleAdapter";
     SimpleExoPlayer exoPlayer;
+
 
    private OnItemClickListener listener;
     public TimeCapsuleAdapter(@NonNull FirestoreRecyclerOptions<TimeCapsule> options) {
         super(options);
+        timeCapsuleFilteredList=new ArrayList<>();
+        timeCapsuleList=new ArrayList<>();
+        if (options.getOwner() != null) {
+            options.getOwner().getLifecycle().addObserver(this);
+        }
+
     }
 
     @Override
@@ -81,7 +95,7 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
         }
         else
         {
-            Picasso.get().load(model.getImageDownloadURL()).fit().centerCrop().into(holder.ImageViewPhoto, new Callback() {
+            Picasso.get().load(model.getImageDownloadURL()).noFade().into(holder.ImageViewPhoto, new Callback() {
                 @Override
                 public void onSuccess() {
                     Log.d(TAG, "image downlaod sucess" );
@@ -120,6 +134,8 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
 
     }
 
+
+
     @NonNull
     @Override
     public TimeCapsuleHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -131,6 +147,54 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
     {
         getSnapshots().getSnapshot(position).getReference().delete();
     }
+
+
+
+
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                    final FilterResults results=new FilterResults();
+                if (constraint==null||constraint.length()==0) {
+                    results.values=timeCapsuleFilteredList;
+                    results.count=timeCapsuleFilteredList.size();
+                } else {
+                        List<TimeCapsule>filteredList=new ArrayList<>();
+                    final String filterPattern=constraint.toString().toLowerCase().trim();
+
+                    for (TimeCapsule timeCapsule:timeCapsuleList) {
+
+                        // name match condition. this might differ depending on your requirement
+                        // here we are looking for name or phone number match
+                        if (timeCapsule.getTitle().toLowerCase().contains(filterPattern))
+                        {
+                            filteredList.add(timeCapsule);
+                        }
+                    }
+
+                   results.values=filteredList;
+                    results.count= filteredList.size();
+
+                }
+
+
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults results) {
+                timeCapsuleList.clear();
+                timeCapsuleList.addAll((List)results.values);
+
+                // refresh the list with filtered data
+                notifyDataSetChanged();
+            }
+        };
+    }
+
 
     class TimeCapsuleHolder extends RecyclerView.ViewHolder {
         TextView textViewTitle;
@@ -146,6 +210,7 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
             ImageViewPhoto=itemView.findViewById(R.id.imageView_photo);
 
 
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -157,6 +222,8 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
                     }
                 }
             });
+
+
     }
 
     }
@@ -170,4 +237,8 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
     {
             this.listener=listener;
     }
+
+
+
+
 }

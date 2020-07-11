@@ -40,6 +40,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:19.1.1'
     implementation 'com.facebook.android:facebook-login:[5,6)'
     implementation 'com.firebaseui:firebase-ui-firestore:6.2.1'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
     testImplementation 'junit:junit:4.13'
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
@@ -50,5 +52,15 @@ dependencies {
    // implementation 'com.google.android.exoplayer:exoplayer-core:2.10.8'
    // implementation 'com.google.android.exoplayer:exoplayer-dash:2.10.8'
    // implementation 'com.google.android.exoplayer:exoplayer-ui:2.10.8'
+    implementation 'com.google.ar:core:1.15.0'
+    implementation  'com.google.ar.sceneform.ux:sceneform-ux:1.15.0'
+    implementation 'com.mikhaellopez:circularprogressbar:3.0.3'
+
+    apply plugin: 'com.google.ar.sceneform.plugin'
+
+    sceneform.asset('sampledata/model.obj',
+            'default',
+            'sampledata/model.sfa',
+            'src/main/assets/model')
 
 }

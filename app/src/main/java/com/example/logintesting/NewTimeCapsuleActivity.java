@@ -2,10 +2,12 @@ package com.example.logintesting;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,27 +16,34 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.MediaController;
 import android.widget.NumberPicker;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
+
+import java.util.List;
 
 public class NewTimeCapsuleActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -47,10 +56,12 @@ public class NewTimeCapsuleActivity extends AppCompatActivity implements View.On
     private StorageReference mStorageRef;
     private DocumentReference documentReference;
     String TAG="NewTimeCapsuleActivity";
+    private CircularProgressBar mProgressBar;
     StorageTask<UploadTask.TaskSnapshot> mUplaodTask;
     Uri ImageUrl;
     Uri VideoUrl;
     MediaController mediaController;
+    String CapsuleID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +79,11 @@ public class NewTimeCapsuleActivity extends AppCompatActivity implements View.On
        ButtonForImage=findViewById(R.id.ImageUpload);
         ButtonForVideo=findViewById(R.id.VideoUpload);
         mediaController=new MediaController(this);
+        mProgressBar =  findViewById(R.id.circularProgressBar);
+        // or with gradient
+        mProgressBar.setProgressBarColorStart(Color.GRAY)  ;
+        mProgressBar.setProgressBarColorEnd(Color.RED);
+        mProgressBar.setProgressBarColorDirection(CircularProgressBar.GradientDirection.TOP_TO_BOTTOM);
 
        numberPickerPriority.setMinValue(1);
        numberPickerPriority.setMaxValue(10);
@@ -103,6 +119,16 @@ public class NewTimeCapsuleActivity extends AppCompatActivity implements View.On
         int priority=numberPickerPriority.getValue();
         String ImageDownloadURL;
         String VideoDownloadURL;
+        String CapsuleType="";
+        List<String> Receiver=null;
+        List <String> favouritebyUser=null;
+        String SceneformKey="";
+        Double GoogleMapLocation_latitude =null;
+        Double  GoogleMapLocation_longitude = null;
+        Timestamp ValidTimeStampForOpen=Timestamp.now();
+        List <String> OpenedbyUser=null;
+
+
         if(ImageUrl!=null)
         {
              ImageDownloadURL=ImageUrl.toString();
@@ -132,9 +158,33 @@ public class NewTimeCapsuleActivity extends AppCompatActivity implements View.On
 
         CollectionReference timecapsuleRef= FirebaseFirestore.getInstance()
                 .collection("TimeCapsuleBook");
-        timecapsuleRef.add(new TimeCapsule(title,description,priority,ImageDownloadURL,VideoDownloadURL));
+        timecapsuleRef.add(new TimeCapsule(title,description,priority,ImageDownloadURL,VideoDownloadURL,CapsuleType,Receiver,favouritebyUser,OpenedbyUser,SceneformKey,GoogleMapLocation_latitude,GoogleMapLocation_longitude,ValidTimeStampForOpen))
+        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                    CapsuleID=documentReference.getId();
+
+
+                Intent intent = new Intent(NewTimeCapsuleActivity.this, Choose_ar_or_time_capsule.class);
+                intent.putExtra("TimecapsuleRefID",CapsuleID);
+                startActivity(intent);
+                 finish();
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
         Toast.makeText(this,"Note added",Toast.LENGTH_LONG).show();
-        finish();
+
+
+        //gotonextpage
+
+
+
 
     }
 
@@ -180,7 +230,7 @@ public class NewTimeCapsuleActivity extends AppCompatActivity implements View.On
                 Uri imageUri=data.getData();
                 if(imageUri!=null)
                 {
-                    Toast.makeText(this,"Clicked",Toast.LENGTH_LONG).show();
+                   // Toast.makeText(this,"Clicked",Toast.LENGTH_LONG).show();
                     uploadImageToFireBase(imageUri);
                 }
 
@@ -218,9 +268,10 @@ public class NewTimeCapsuleActivity extends AppCompatActivity implements View.On
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                //mProgressBar.setProgress(0);
+                                mProgressBar. setVisibility(View.VISIBLE);
+                                mProgressBar.setProgressWithAnimation(0);
                             }
-                        },500);
+                        },10);
 
                         Toast.makeText(NewTimeCapsuleActivity.this,"Image Uploaded",
                                 Toast.LENGTH_SHORT).show();
@@ -260,8 +311,14 @@ public class NewTimeCapsuleActivity extends AppCompatActivity implements View.On
                     @Override
                     public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
                         double progress=(100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                        //mProgressBar.setProgress((int)progress);
+                        mProgressBar.setProgressWithAnimation((int)progress);
 
+
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                        mProgressBar. setVisibility(View.INVISIBLE);
                     }
                 });
     }
@@ -281,9 +338,10 @@ public class NewTimeCapsuleActivity extends AppCompatActivity implements View.On
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                //mProgressBar.setProgress(0);
+                                mProgressBar. setVisibility(View.VISIBLE);
+                                mProgressBar.setProgressWithAnimation(0);
                             }
-                        },500);
+                        },10);
 
                         Toast.makeText(NewTimeCapsuleActivity.this,"video Uploaded",
                                 Toast.LENGTH_SHORT).show();
@@ -304,6 +362,7 @@ public class NewTimeCapsuleActivity extends AppCompatActivity implements View.On
                                 if (task.isSuccessful()) {
                                     VideoUrl= task.getResult();
 
+
                                 } else {
                                     // Handle failures
                                     // ...
@@ -323,11 +382,19 @@ public class NewTimeCapsuleActivity extends AppCompatActivity implements View.On
                     @Override
                     public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
                         double progress=(100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                        //mProgressBar.setProgress((int)progress);
+                        mProgressBar.setProgressWithAnimation((int)progress);
 
+
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                        mProgressBar. setVisibility(View.INVISIBLE);
                     }
                 });
     }
+
+
 
 
 }
