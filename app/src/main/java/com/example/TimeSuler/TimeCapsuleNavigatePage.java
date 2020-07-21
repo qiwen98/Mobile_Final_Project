@@ -1,31 +1,25 @@
-package com.example.logintesting;
+package com.example.TimeSuler;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 
 import android.widget.Toast;
 
 
+import com.example.logintesting.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,13 +28,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.util.Date;
 
 public class TimeCapsuleNavigatePage extends AppCompatActivity {
 
@@ -48,8 +41,10 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
     private CollectionReference TimeCapsuleRef=db.collection("TimeCapsuleBook");
 
     private  TimeCapsuleAdapter adapter;
+
     private  FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    private EditText search_bar;
+    String TAG="TimeCapsuleNavigatePage";
+
 
 
     @Override
@@ -75,6 +70,8 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
     }
 
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater= getMenuInflater();
@@ -93,8 +90,10 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                return false;
+               // adapter.getFilter().filter(newText);
+               // adapter.notifyDataSetChanged();
+                firebaseTimeCapsuleSearch(newText);
+                return true;
             }
         });
 
@@ -105,7 +104,7 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
     }
 
     private void setUpRecyclerView() {
-        Query query= TimeCapsuleRef.whereArrayContains("receiver", user.getUid())
+        Query query= TimeCapsuleRef.whereArrayContains("receiver", user.getEmail())
                 .orderBy("validTimeStampForOpen", Query.Direction.DESCENDING);
 
         // Query query= TimeCapsuleRef.orderBy("priority",Query.Direction.DESCENDING);
@@ -122,7 +121,7 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
       // recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT |ItemTouchHelper.RIGHT) {
@@ -149,6 +148,10 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
                 String CapsuleType=timeCapsule.getCapsuleType();
                 Double latitude=timeCapsule.getGoogleMapLocation_latitude();
                 Double longtitude=timeCapsule.getGoogleMapLocation_longitude();
+                Timestamp timetoopen=timeCapsule.getValidTimeStampForOpen();
+                Timestamp CurrentTimeStamp=Timestamp.now();
+                adapter.setOpened(position);
+
 
 
                 Timestamp timestamp=timeCapsule.getValidTimeStampForOpen();
@@ -156,20 +159,53 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
 
                 Toast.makeText(TimeCapsuleNavigatePage.this,"Position: "+position+" and ID "+id+" and Title "+title+ latitude,Toast.LENGTH_LONG).show();
 
+
+
                if(CapsuleType.equals("ArCapsule"))
                {
                    LatLng Time_Capsule_latling=new LatLng(latitude, longtitude);
 
                    Intent intent = new Intent(TimeCapsuleNavigatePage.this, Map_Activity.class);
                    intent.putExtra("Location", Time_Capsule_latling);
+
                     startActivity(intent);
-             }
+                 }
 
-                //intent.putExtra("Video_URL", VideoURL);
+               else  // if time capsule
+               {
 
-               // Intent intent = new Intent(TimeCapsuleNavigatePage.this, PlayerActivity.class);
-                //intent.putExtra("Video_URL", VideoURL);
-               // startActivity(intent);
+                   if(CurrentTimeStamp.compareTo(timetoopen)>=0)
+                   {
+                       Log.d(TAG, "onItemClick: the compare is over");
+                       Intent intent = new Intent(TimeCapsuleNavigatePage.this, PlayerActivity.class);
+                       intent.putExtra("Video_URL", VideoURL);
+                       startActivity(intent);
+                   }
+                   else
+                   {
+                       Log.d(TAG, "onItemClick: you cannot open yet");
+                       // this is how to create a date
+
+                       String pattern = "yyyy-MM-dd";
+                       SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+                        try{
+                            Date date = simpleDateFormat.parse("2018-09-09");
+                            Timestamp New_timestamp=new Timestamp(date);
+                            Log.d(TAG, "onItemClick: "+ New_timestamp);
+                        }
+                        catch (Exception e) {
+                            //The handling for the code
+                        }
+                      // Date date = new Date();
+                       //String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(date);
+
+
+                   }
+
+
+               }
+
+
 
             }
         });
@@ -177,6 +213,31 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
 
 
     }
+
+    private void firebaseTimeCapsuleSearch(String searchText) {
+
+        // Toast.makeText(SelectReceiverActivity.this, "Started Search", Toast.LENGTH_LONG).show();
+
+
+
+        Log.d(TAG, "firebaseTimeCapsuleSearch: "+searchText);
+
+        Query query = TimeCapsuleRef.orderBy("title")
+                .whereArrayContains("receiver", user.getEmail())
+
+                .startAt(searchText).endAt(searchText + "\uf8ff");
+
+        FirestoreRecyclerOptions<TimeCapsule> options= new FirestoreRecyclerOptions.Builder<TimeCapsule>()
+                .setQuery(query,TimeCapsule.class)
+                .build();
+
+        adapter.updateOptions(options);
+
+
+
+    }
+
+
 
 
 
@@ -190,6 +251,9 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        adapter.stopListening();
+        if(adapter!=null)
+        {
+            adapter.stopListening();
+        }
     }
 }

@@ -1,10 +1,6 @@
-package com.example.logintesting;
+package com.example.TimeSuler;
 
-import android.net.Uri;
-
-import com.facebook.internal.ImageDownloader;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.errorprone.annotations.Var;
 import com.google.firebase.Timestamp;
 
 import java.util.List;

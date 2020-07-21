@@ -1,56 +1,37 @@
-package com.example.logintesting;
+package com.example.TimeSuler;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.ColorSpace;
-import android.net.Uri;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.logintesting.R;
+import com.firebase.ui.common.ChangeEventType;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.firebase.ui.firestore.ObservableSnapshotArray;
-import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
-import com.google.android.exoplayer2.extractor.ExtractorsFactory;
-import com.google.android.exoplayer2.source.ExtractorMediaSource;
-import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.trackselection.TrackSelector;
-import com.google.android.exoplayer2.upstream.BandwidthMeter;
-import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.media.CamcorderProfile.get;
 
-public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,TimeCapsuleAdapter.TimeCapsuleHolder> implements Filterable {
+public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,TimeCapsuleAdapter.TimeCapsuleHolder>  {
 
     /**
      * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
@@ -61,8 +42,9 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
 
     private  Context context;
     private  List<TimeCapsule>timeCapsuleList,timeCapsuleFilteredList;
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-
+   // private final ObservableSnapshotArray<TimeCapsule> mSnapshots;
     private boolean isFiltarable;
     String TAG="TimeCapsuleAdapter";
     SimpleExoPlayer exoPlayer;
@@ -71,13 +53,24 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
    private OnItemClickListener listener;
     public TimeCapsuleAdapter(@NonNull FirestoreRecyclerOptions<TimeCapsule> options) {
         super(options);
-        timeCapsuleFilteredList=new ArrayList<>();
+        timeCapsuleFilteredList=options.getSnapshots();
         timeCapsuleList=new ArrayList<>();
         if (options.getOwner() != null) {
             options.getOwner().getLifecycle().addObserver(this);
         }
 
+
+        Log.d(TAG, "TimeCapsuleAdapter: snapshots:"+options);
     }
+
+
+
+
+
+
+
+
+
 
     @Override
     protected void onBindViewHolder(@NonNull TimeCapsuleHolder holder, int position, @NonNull TimeCapsule model) {
@@ -87,6 +80,53 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
         holder.textViewTitle.setText(model.getTitle());
         holder.textViewDescription.setText(model.getDescription());
         holder.textViewPriority.setText(String.valueOf(model.getPriority()));
+        holder.textViewDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(model.getFavouritebyUser()!=null) {
+                    if (model.getFavouritebyUser().contains(user.getUid())) {
+                        //  holder.textViewTitle.setText("AR");
+                        setunFavourite(position);
+                    } else {
+                        setFavourite(position);
+                    }
+
+
+                }
+                else
+                {
+                    setFavourite(position);
+                }
+
+            }
+        });
+
+        if(model.getCapsuleType().equals("ArCapsule"))
+        {
+          //  holder.textViewTitle.setText("AR");
+            holder.cardView.setCardBackgroundColor(Color.parseColor("#E6E6E6"));
+        }
+
+
+        if(model.getOpenedbyUser()!=null)
+        {
+            if(model.getOpenedbyUser().contains(user.getUid()))
+            {
+                //  holder.textViewTitle.setText("AR");
+                holder.cardView.setCardBackgroundColor(Color.RED);
+            }
+        }
+
+
+        if(model.getFavouritebyUser()!=null)
+        {
+            if(model.getFavouritebyUser().contains(user.getUid()))
+            {
+                //  holder.textViewTitle.setText("AR");
+                holder.textViewTitle.setText("favoutie");
+            }
+        }
+
 
 
         if(model.getImageDownloadURL().isEmpty())
@@ -140,6 +180,7 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
     @Override
     public TimeCapsuleHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.capsule_item,parent,false);
+
         return new TimeCapsuleHolder(v);
     }
 
@@ -148,52 +189,40 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
         getSnapshots().getSnapshot(position).getReference().delete();
     }
 
+    public void setOpened(int position)
+    {
+        getSnapshots().getSnapshot(position).getReference().update("openedbyUser", FieldValue.arrayUnion(user.getUid()));
+    }
+
+    public void setFavourite(int position)
+    {
+        getSnapshots().getSnapshot(position).getReference().update("favouritebyUser", FieldValue.arrayUnion(user.getUid()));
+    }
+
+    public void setunFavourite(int position)
+    {
+        getSnapshots().getSnapshot(position).getReference().update("favouritebyUser", FieldValue.arrayRemove(user.getUid()));
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+       if(getSnapshots().getSnapshot(position).toObject(TimeCapsule.class).getCapsuleType().equals("ArCapsule"))
+        {
+            Log.d(TAG, "getItemViewType: ARcapsule");
+        }
+        return super.getItemViewType(position);
+    }
+
 
 
 
 
     @Override
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                    final FilterResults results=new FilterResults();
-                if (constraint==null||constraint.length()==0) {
-                    results.values=timeCapsuleFilteredList;
-                    results.count=timeCapsuleFilteredList.size();
-                } else {
-                        List<TimeCapsule>filteredList=new ArrayList<>();
-                    final String filterPattern=constraint.toString().toLowerCase().trim();
+    public void onChildChanged(@NonNull ChangeEventType type, @NonNull DocumentSnapshot snapshot, int newIndex, int oldIndex) {
 
-                    for (TimeCapsule timeCapsule:timeCapsuleList) {
-
-                        // name match condition. this might differ depending on your requirement
-                        // here we are looking for name or phone number match
-                        if (timeCapsule.getTitle().toLowerCase().contains(filterPattern))
-                        {
-                            filteredList.add(timeCapsule);
-                        }
-                    }
-
-                   results.values=filteredList;
-                    results.count= filteredList.size();
-
-                }
-
-
-                return results;
-            }
-
-            @Override
-            protected void publishResults(CharSequence charSequence, FilterResults results) {
-                timeCapsuleList.clear();
-                timeCapsuleList.addAll((List)results.values);
-
-                // refresh the list with filtered data
-                notifyDataSetChanged();
-            }
-        };
+        super.onChildChanged(type, snapshot, newIndex, oldIndex);
     }
+
 
 
     class TimeCapsuleHolder extends RecyclerView.ViewHolder {
@@ -201,6 +230,7 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
         TextView textViewDescription;
         TextView textViewPriority;
         ImageView ImageViewPhoto;
+        CardView cardView;
 
         public  TimeCapsuleHolder(View itemView){
             super(itemView);
@@ -208,6 +238,7 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
             textViewDescription=itemView.findViewById(R.id.text_view_description);
             textViewPriority=itemView.findViewById(R.id.text_view_priority);
             ImageViewPhoto=itemView.findViewById(R.id.imageView_photo);
+            cardView=itemView.findViewById(R.id.capsule_background);
 
 
 
@@ -227,6 +258,11 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
     }
 
     }
+
+
+
+
+
 
     public interface OnItemClickListener{
         void onItemClick(DocumentSnapshot documentSnapshot,int position);

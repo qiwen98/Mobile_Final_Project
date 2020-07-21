@@ -1,4 +1,4 @@
-package com.example.logintesting;
+package com.example.TimeSuler;
 
 import com.google.ar.core.Config;
 import com.google.ar.core.Session;

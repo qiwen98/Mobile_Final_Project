@@ -1,4 +1,4 @@
-package com.example.logintesting;
+package com.example.TimeSuler;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,38 +13,27 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.logintesting.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.ar.core.Anchor;
-import com.google.ar.core.HitResult;
-import com.google.ar.core.Plane;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.rendering.ModelRenderable;
-import com.google.ar.sceneform.ux.ArFragment;
-import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
-import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.List;
+import java.util.ArrayList;
 
 public class ARactivity<placeModel> extends AppCompatActivity {
 
@@ -69,7 +58,9 @@ public class ARactivity<placeModel> extends AppCompatActivity {
     LatLng Current_loc_latLng;
 
     private final String TAG = "ARacivity";
+    private  String prevactivity;
 
+    private boolean fromMap=false;
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
     private CollectionReference TimeCapsuleRef=db.collection("TimeCapsuleBook");
 
@@ -94,7 +85,9 @@ public class ARactivity<placeModel> extends AppCompatActivity {
 
         //google map part
 
+
         arFragment = (CustomArFragment) getSupportFragmentManager().findFragmentById(R.id.ar_fragment);
+
 
 
         arFragment.setOnTapArPlaneListener((hitResult, plane, motionEvent) -> {
@@ -103,11 +96,23 @@ public class ARactivity<placeModel> extends AppCompatActivity {
             tap_amount++;
             if(tap_amount==1)
             {
-                anchor=arFragment.getArSceneView().getSession().hostCloudAnchor(hitResult.createAnchor());
-                createModel(anchor);
-                showToast("Drag your Model to change the location");
-                showToast("Click on the plane for confirming the location");
+
+
+                if(fromMap)
+                {
+                    showToast("Tap on the ground to open");
+                }
+                else
+                {
+                    anchor=arFragment.getArSceneView().getSession().hostCloudAnchor(hitResult.createAnchor());
+                    createModel(anchor);
+                    showToast("Drag your Model to change the location");
+                    showToast("Click on the plane for confirming the location");
+                }
+
             }
+
+
 
 
             if(!isPlaced&& tap_amount==2)
@@ -158,8 +163,31 @@ public class ARactivity<placeModel> extends AppCompatActivity {
 
         });
 
-
         Button resolve= findViewById(R.id.resolve);
+        resolve.setVisibility(View.GONE);
+
+        prevactivity=getIntent().getStringExtra("Activity");
+        if(prevactivity.equals("Map_Activity") )
+        {
+            Log.d(TAG, "onCreate: frommap");
+            fromMap=true;
+            resolve.setVisibility(View.VISIBLE);
+
+            resolve.setOnClickListener(view->{
+                String anchorID= prefs.getString("AnchorID","null");
+                if(anchorID.equals("null"))
+                {
+                    showToast("No anchordId found");
+                    return;
+                }
+                Anchor resolvedAnchor=arFragment.getArSceneView().getSession().resolveCloudAnchor(anchorID);
+                createModel(resolvedAnchor);
+            });
+
+        }
+
+
+     /*   Button resolve= findViewById(R.id.resolve);
         resolve.setOnClickListener(view->{
             String anchorID= prefs.getString("AnchorID","null");
             if(anchorID.equals("null"))
@@ -171,6 +199,8 @@ public class ARactivity<placeModel> extends AppCompatActivity {
             createModel(resolvedAnchor);
         });
 
+      */
+
 
 
     }
@@ -178,8 +208,8 @@ public class ARactivity<placeModel> extends AppCompatActivity {
     private void updatetheTimeCapsule(String AnchorID) {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String TimecapsuleRefID=getIntent().getStringExtra("TimecapsuleRefID");
-
-
+        ArrayList<String>receiverList= (ArrayList<String>) getIntent().getSerializableExtra("Receivers");;
+        //List<String>receiverList = null;
 
         //showToast(TimecapsuleRefID);
         TimeCapsuleRef.document(TimecapsuleRefID)
@@ -187,13 +217,14 @@ public class ARactivity<placeModel> extends AppCompatActivity {
                         "sceneformKey",AnchorID,
                         "googleMapLocation_latitude",Current_loc_latLng.latitude,
                         "googleMapLocation_longitude",Current_loc_latLng.longitude,
-                        "receiver", Arrays.asList(user.getUid(),user.getUid())
+                        "receiver", receiverList
                         )
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "DocumentSnapshot successfully updated!");
                         showToast("Your Ar Capsule is ready !!");
+                        showToast(TimecapsuleRefID);
 
                         Intent intent = new Intent(ARactivity.this, TimeCapsuleNavigatePage.class);
                         startActivity(intent);

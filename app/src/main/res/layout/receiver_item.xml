@@ -18,7 +18,7 @@
     app:cardCornerRadius="13dp"
     app:cardElevation="8dp"
     android:layout_centerHorizontal="true"
-    android:id="@+id/capsule_background">
+    android:id="@+id/receiver_card_background">
 
     <!--   -->
 
@@ -28,7 +28,7 @@
         android:padding="0dp">
 
         <ImageView
-            android:id="@+id/imageView_photo"
+            android:id="@+id/Receiver_imageView_photo"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
 
         <TextView
 
-            android:id="@+id/text_view_title"
+            android:id="@+id/text_view_Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/text_view_priority"
@@ -68,7 +68,7 @@
         <!--android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"-->
         <TextView
-            android:id="@+id/text_view_description"
+            android:id="@+id/text_view_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/text_view_title"
@@ -85,8 +85,6 @@
             android:layout_marginRight="10dp"
             android:clickable="true"
             />
-
-
         <!--android:layout_below="@+id/text_view_title"
                         android:layout_toRightOf="@id/text_view_description"
                         android:layout_gravity="right|bottom"-->

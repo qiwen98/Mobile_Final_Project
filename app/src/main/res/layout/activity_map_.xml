@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Map_Activity">
+    tools:context="com.example.logintesting.com.example.TimeSuler.Map_Activity">
 
     <fragment
         android:layout_width="match_parent"

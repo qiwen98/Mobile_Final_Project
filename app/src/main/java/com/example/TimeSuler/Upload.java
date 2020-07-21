@@ -1,4 +1,4 @@
-package com.example.logintesting;
+package com.example.TimeSuler;
 
 public class Upload {
     private String mName;

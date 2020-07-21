@@ -1,4 +1,4 @@
-package com.example.logintesting;
+package com.example.TimeSuler;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,14 +16,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.MediaController;
 import android.widget.NumberPicker;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.maps.model.LatLng;
+import com.example.logintesting.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -35,7 +34,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -166,7 +164,7 @@ public class NewTimeCapsuleActivity extends AppCompatActivity implements View.On
                     CapsuleID=documentReference.getId();
 
 
-                Intent intent = new Intent(NewTimeCapsuleActivity.this, Choose_ar_or_time_capsule.class);
+                Intent intent = new Intent(NewTimeCapsuleActivity.this, SelectReceiverActivity.class);
                 intent.putExtra("TimecapsuleRefID",CapsuleID);
                 startActivity(intent);
                  finish();

@@ -1,4 +1,4 @@
-package com.example.logintesting;
+package com.example.TimeSuler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Toast;
+
+import com.example.logintesting.R;
+
+import java.io.Serializable;
+import java.util.List;
 
 public class Choose_ar_or_time_capsule extends AppCompatActivity implements View.OnClickListener {
 
@@ -14,6 +18,7 @@ public class Choose_ar_or_time_capsule extends AppCompatActivity implements View
 
     private ImageButton ButtonForTime;
     private String TimecapsuleRef_ID;
+    private List<String>receiverList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +28,8 @@ public class Choose_ar_or_time_capsule extends AppCompatActivity implements View
         ButtonForTime=findViewById(R.id.ArCapsuleBut);
 
         TimecapsuleRef_ID=getIntent().getStringExtra("TimecapsuleRefID");
+        receiverList= (List<String>) getIntent().getSerializableExtra("Receivers");
+
         //Toast.makeText(Choose_ar_or_time_capsule.this,TimecapsuleRef_ID,Toast.LENGTH_LONG).show();
         ButtonForAR.setOnClickListener(this);
         ButtonForTime.setOnClickListener(this);
@@ -36,6 +43,7 @@ public class Choose_ar_or_time_capsule extends AppCompatActivity implements View
                 //go time capsule page
 
                 Intent intent = new Intent(Choose_ar_or_time_capsule.this, Map_Activity.class);
+                intent.putExtra("Receivers", (Serializable) receiverList);
                 intent.putExtra("TimecapsuleRefID",  TimecapsuleRef_ID);
                 startActivity(intent);
                 break;
@@ -45,6 +53,9 @@ public class Choose_ar_or_time_capsule extends AppCompatActivity implements View
 
                 intent = new Intent(Choose_ar_or_time_capsule.this, ARactivity.class);
                 intent.putExtra("TimecapsuleRefID",  TimecapsuleRef_ID);
+
+                intent.putExtra("Receivers", (Serializable) receiverList);
+                intent.putExtra("Activity", " Choose_ar_or_time_capsule");
                 startActivity(intent);
                 //go ar capsule page
                // finish();
