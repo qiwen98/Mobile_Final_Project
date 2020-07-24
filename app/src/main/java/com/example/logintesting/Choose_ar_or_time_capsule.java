@@ -1,4 +1,4 @@
-package com.example.TimeSuler;
+package com.example.logintesting;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-
-import com.example.logintesting.R;
 
 import java.io.Serializable;
 import java.util.List;
@@ -42,7 +40,7 @@ public class Choose_ar_or_time_capsule extends AppCompatActivity implements View
 
                 //go time capsule page
 
-                Intent intent = new Intent(Choose_ar_or_time_capsule.this, Map_Activity.class);
+                Intent intent = new Intent(Choose_ar_or_time_capsule.this, DatePickPage.class);
                 intent.putExtra("Receivers", (Serializable) receiverList);
                 intent.putExtra("TimecapsuleRefID",  TimecapsuleRef_ID);
                 startActivity(intent);

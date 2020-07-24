@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
-    tools:context="com.example.logintesting.com.example.TimeSuler.TimeCapsuleNavigatePage">
+    tools:context="com.example.logintesting.TimeCapsuleNavigatePage">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"

@@ -1,4 +1,4 @@
-package com.example.TimeSuler;
+package com.example.logintesting;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +17,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.logintesting.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
@@ -83,6 +82,8 @@ public class ARactivity<placeModel> extends AppCompatActivity {
 
 
 
+
+
         //google map part
 
 
@@ -94,13 +95,29 @@ public class ARactivity<placeModel> extends AppCompatActivity {
 
 
             tap_amount++;
+            if (fromMap)
+            {
+                String VideoURL=getIntent().getStringExtra("Video_URL");
+                if(!VideoURL.isEmpty())
+                {
+                    Intent intent = new Intent(ARactivity.this, PlayerActivity.class);
+                    intent.putExtra("Video_URL", VideoURL);
+                    startActivity(intent);
+                    finish();
+                }
+                else
+                {
+                    Toast.makeText(ARactivity.this,"this time capsule is empty",Toast.LENGTH_LONG).show();
+                }
+            }
+
             if(tap_amount==1)
             {
 
 
                 if(fromMap)
                 {
-                    showToast("Tap on the ground to open");
+
                 }
                 else
                 {
@@ -115,7 +132,7 @@ public class ARactivity<placeModel> extends AppCompatActivity {
 
 
 
-            if(!isPlaced&& tap_amount==2)
+            if(!isPlaced&& tap_amount==2&&!fromMap)
             {
 
 
@@ -174,7 +191,8 @@ public class ARactivity<placeModel> extends AppCompatActivity {
             resolve.setVisibility(View.VISIBLE);
 
             resolve.setOnClickListener(view->{
-                String anchorID= prefs.getString("AnchorID","null");
+                String anchorID= getIntent().getStringExtra("AnchorID");
+                showToast("Tap on the ground to open you ARCapsule");
                 if(anchorID.equals("null"))
                 {
                     showToast("No anchordId found");

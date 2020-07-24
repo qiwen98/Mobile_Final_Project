@@ -1,4 +1,4 @@
-package com.example.TimeSuler;
+package com.example.logintesting;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,7 +22,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.logintesting.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -103,7 +102,17 @@ public class NewTimeCapsuleActivity extends AppCompatActivity implements View.On
     {
         switch (item.getItemId()){
             case R.id.save_note:
-                saveNote();
+               if(mUplaodTask!=null&&mUplaodTask.isInProgress())
+               {
+                   Toast.makeText(NewTimeCapsuleActivity.this,"Upload in Progress " ,
+                           Toast.LENGTH_SHORT).show();
+               }
+               else
+               {
+                   saveNote();
+               }
+
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -176,7 +185,7 @@ public class NewTimeCapsuleActivity extends AppCompatActivity implements View.On
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
-        Toast.makeText(this,"Note added",Toast.LENGTH_LONG).show();
+       // Toast.makeText(this,"Note added",Toast.LENGTH_LONG).show();
 
 
         //gotonextpage

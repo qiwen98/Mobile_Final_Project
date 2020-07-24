@@ -1,4 +1,4 @@
-package com.example.TimeSuler;
+package com.example.logintesting;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +12,6 @@ import android.location.Location;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.logintesting.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -42,6 +41,7 @@ public class Map_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_map_);
 
         timecapsulelocation=getIntent().getExtras().getParcelable("Location");
+
 
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
 
@@ -112,8 +112,13 @@ public class Map_Activity extends AppCompatActivity {
                                 Toast.makeText(Map_Activity.this, "unlock time capsule",
                                         Toast.LENGTH_SHORT).show();
 
+                                String sceneformkey=getIntent().getStringExtra("AnchorID");
+                                String VideoURL=getIntent().getStringExtra("Video_URL");
+
                                Intent intent = new Intent(Map_Activity.this, ARactivity.class);
                                 intent.putExtra("Activity", "Map_Activity");
+                                intent.putExtra("AnchorID", sceneformkey);
+                                intent.putExtra("Video_URL", VideoURL);
                                 startActivity(intent);
                             }
 

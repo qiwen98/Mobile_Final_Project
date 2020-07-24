@@ -1,4 +1,4 @@
-package com.example.TimeSuler;
+package com.example.logintesting;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.Timestamp;

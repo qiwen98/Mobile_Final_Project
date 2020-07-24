@@ -1,4 +1,4 @@
-package com.example.TimeSuler;
+package com.example.logintesting;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +19,6 @@ import android.view.View;
 import android.widget.Toast;
 
 
-import com.example.logintesting.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,7 +31,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.util.Date;
 
 public class TimeCapsuleNavigatePage extends AppCompatActivity {
@@ -150,6 +148,7 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
                 Double longtitude=timeCapsule.getGoogleMapLocation_longitude();
                 Timestamp timetoopen=timeCapsule.getValidTimeStampForOpen();
                 Timestamp CurrentTimeStamp=Timestamp.now();
+                String sceneformKey=timeCapsule.getSceneformKey();
                 adapter.setOpened(position);
 
 
@@ -167,6 +166,8 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
 
                    Intent intent = new Intent(TimeCapsuleNavigatePage.this, Map_Activity.class);
                    intent.putExtra("Location", Time_Capsule_latling);
+                   intent.putExtra("AnchorID",sceneformKey );
+                   intent.putExtra("Video_URL", VideoURL);
 
                     startActivity(intent);
                  }
@@ -177,27 +178,24 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
                    if(CurrentTimeStamp.compareTo(timetoopen)>=0)
                    {
                        Log.d(TAG, "onItemClick: the compare is over");
-                       Intent intent = new Intent(TimeCapsuleNavigatePage.this, PlayerActivity.class);
-                       intent.putExtra("Video_URL", VideoURL);
-                       startActivity(intent);
+                       if(!VideoURL.isEmpty())
+                       {
+                           Intent intent = new Intent(TimeCapsuleNavigatePage.this, PlayerActivity.class);
+                           intent.putExtra("Video_URL", VideoURL);
+                           startActivity(intent);
+                       }
+                       else
+                       {
+                           Toast.makeText(TimeCapsuleNavigatePage.this,"this time capsule is empty",Toast.LENGTH_LONG).show();
+                       }
+
                    }
                    else
                    {
-                       Log.d(TAG, "onItemClick: you cannot open yet");
+                       Log.d(TAG, "onItemClick: you cannot open yet "+CurrentTimeStamp+"   "+timetoopen);
                        // this is how to create a date
 
-                       String pattern = "yyyy-MM-dd";
-                       SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-                        try{
-                            Date date = simpleDateFormat.parse("2018-09-09");
-                            Timestamp New_timestamp=new Timestamp(date);
-                            Log.d(TAG, "onItemClick: "+ New_timestamp);
-                        }
-                        catch (Exception e) {
-                            //The handling for the code
-                        }
-                      // Date date = new Date();
-                       //String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(date);
+                       Toast.makeText(TimeCapsuleNavigatePage.this,"You cannot open yet",Toast.LENGTH_LONG).show();
 
 
                    }
@@ -236,8 +234,6 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
 
 
     }
-
-
 
 
 

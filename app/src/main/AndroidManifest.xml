@@ -17,24 +17,25 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/project_id"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.TimeSuler.SelectReceiverActivity"></activity>
-        <activity android:name="com.example.TimeSuler.Map_Activity" />
-        <activity android:name="com.example.TimeSuler.Choose_ar_or_time_capsule" />
-        <activity android:name="com.example.TimeSuler.ARactivity" />
-        <activity android:name="com.example.TimeSuler.PlayerActivity" />
+        <activity android:name=".SelectReceiverActivity"></activity>
+        <activity android:name=".DatePickPage"></activity>
+        <activity android:name=".Map_Activity" />
+        <activity android:name=".Choose_ar_or_time_capsule" />
+        <activity android:name=".ARactivity" />
+        <activity android:name=".PlayerActivity" />
         <activity
-            android:name="com.example.TimeSuler.NewTimeCapsuleActivity"
-            android:parentActivityName="com.example.TimeSuler.TimeCapsuleNavigatePage" />
+            android:name=".NewTimeCapsuleActivity"
+            android:parentActivityName=".TimeCapsuleNavigatePage" />
         <activity
-            android:name="com.example.TimeSuler.TimeCapsuleNavigatePage"
+            android:name=".TimeCapsuleNavigatePage"
             android:launchMode="singleTop" />
-        <activity android:name="com.example.TimeSuler.MainPageActivity" />
-        <activity android:name="com.example.TimeSuler.SingUpActivity" />
-        <activity android:name="com.example.TimeSuler.MainActivity">
+        <activity android:name=".MainPageActivity" />
+        <activity android:name=".SingUpActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
