@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mPassword = (EditText) findViewById(R.id.Password);
         btnSignIn = (Button) findViewById(R.id.Login_Button);
         btnSignOut = (Button) findViewById(R.id.SignOut_But);
+        //btnSignOut = (Button) findViewById(R.id.SignOut_But);
         btnSignUp = (Button) findViewById(R.id.SignUp_But);
         google_button= findViewById(R.id.google_button);
 
@@ -181,11 +182,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //toastMessage("go sign up page...");
                 break;
             // ...
-            case R.id.SignOut_But:
+            /*case R.id.SignOut_But:
                 mAuth.signOut();
                 LoginManager.getInstance().logOut();
                 toastMessage("Signing Out...");
-                break;
+                break;*/
 
             case R.id.Login_Button:
                 String email = mEmail.getText().toString();
