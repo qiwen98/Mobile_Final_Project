@@ -1,15 +1,19 @@
 package com.example.logintesting;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.baoyachi.stepview.VerticalStepView;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -33,6 +37,36 @@ public class TimeLineActivity extends AppCompatActivity {
         
 
       setUpTimelineView();
+
+        //Initialize and assign variable
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        //Set home selected
+        bottomNavigationView.setSelectedItemId(R.id.timeline);
+
+        //Perform ItemSelectedListener
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(),Menu_ZMY.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.capsule:
+                        startActivity(new Intent(getApplicationContext(),TimeCapsuleNavigatePage.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.contact:
+                        startActivity(new Intent(getApplicationContext(),SelectReceiverActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.timeline:
+                        return true;
+                }
+                return false;
+            }
+        });
 
     }
 

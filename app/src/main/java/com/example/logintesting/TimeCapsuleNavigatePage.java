@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,8 +46,6 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
     private  FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String TAG="TimeCapsuleNavigatePage";
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +65,36 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
 
                 Intent intent=new Intent(TimeCapsuleNavigatePage.this, NewTimeCapsuleActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        //Initialize and assign variable
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        //Set home selected
+        bottomNavigationView.setSelectedItemId(R.id.capsule);
+
+        //Perform ItemSelectedListener
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(),Menu_ZMY.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.capsule:
+                        return true;
+                    case R.id.contact:
+                        startActivity(new Intent(getApplicationContext(),SelectReceiverActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.timeline:
+                        startActivity(new Intent(getApplicationContext(),TimeLineActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+                return false;
             }
         });
     }

@@ -9,7 +9,7 @@
 
 
 
-        <androidx.recyclerview.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/receiver_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,8 +25,9 @@
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
         android:layout_marginBottom="10dp"
-
         />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
