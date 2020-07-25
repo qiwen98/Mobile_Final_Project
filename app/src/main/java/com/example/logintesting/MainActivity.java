@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
-      /*  btnSignIn.setOnClickListener(new View.OnClickListener() {
+      btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email = mEmail.getText().toString();
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-       */
+
 
        google_button.setOnClickListener(this);
         btnSignUp.setOnClickListener(this);
@@ -182,11 +182,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //toastMessage("go sign up page...");
                 break;
             // ...
-            /*case R.id.SignOut_But:
+            case R.id.SignOut_But:
                 mAuth.signOut();
                 LoginManager.getInstance().logOut();
                 toastMessage("Signing Out...");
-                break;*/
+                break;
 
             case R.id.Login_Button:
                 String email = mEmail.getText().toString();
