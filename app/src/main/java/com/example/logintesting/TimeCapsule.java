@@ -12,6 +12,7 @@ public class TimeCapsule {
     private String VideoDownloadURL;
     private int priority;
     private String CapsuleType;
+    private String Sender;
     private List<String> Receiver;
     private List<String> favouritebyUser;
     private String SceneformKey;
@@ -34,13 +35,14 @@ public class TimeCapsule {
 
 
 
-    public TimeCapsule(String title, String description, int priority, String ImageDownloadURL, String VideoDownloadURL, String CapsuleType, List<String>Receiver, List<String> favouritebyUser, List<String> OpenedbyUser,String SceneformKey, Double GoogleMapLocation_latitude, Double GoogleMapLocation_longitude, Timestamp ValidTimeStampForOpen) {
+    public TimeCapsule(String title, String description, int priority, String ImageDownloadURL, String VideoDownloadURL, String CapsuleType,String Sender, List<String>Receiver, List<String> favouritebyUser, List<String> OpenedbyUser,String SceneformKey, Double GoogleMapLocation_latitude, Double GoogleMapLocation_longitude, Timestamp ValidTimeStampForOpen) {
         this.title = title;
         this.description = description;
         this.priority = priority;
         this.ImageDownloadURL= ImageDownloadURL;
         this.VideoDownloadURL= VideoDownloadURL;
         this.CapsuleType=CapsuleType;
+        this.Sender=Sender;
         this.Receiver=Receiver;
         this.favouritebyUser=favouritebyUser;
         this.OpenedbyUser=OpenedbyUser;
@@ -49,6 +51,7 @@ public class TimeCapsule {
         this.GoogleMapLocation_latitude = GoogleMapLocation_latitude;
         this.GoogleMapLocation_longitude = GoogleMapLocation_longitude;
         this.ValidTimeStampForOpen=ValidTimeStampForOpen;
+
 
     }
 
@@ -148,5 +151,13 @@ public class TimeCapsule {
 
     public void setOpenedbyUser(List<String> openedbyUser) {
         OpenedbyUser = openedbyUser;
+    }
+
+    public String getSender() {
+        return Sender;
+    }
+
+    public void setSender(String sender) {
+        Sender = sender;
     }
 }

@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">LoginTesting</string>
+    <string name="app_name">TimeSuler</string>
     <string name="facebook_app_id">583505282305797</string>
     <string name="fb_login_protocol_scheme">fb583505282305797</string>
-    <string name="receiver_select">select</string>
+    <string name="lorem_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac dolor velit. In cursus faucibus nulla eleifend eleifend. Curabitur sit amet felis eget lectus ornare commodo quis imperdiet nisl. Sed ac velit nec metus pellentesque elementum.
+        Duis dapibus elit sit amet ultricies hendrerit. Donec ac suscipit neque. Donec mi justo, sagittis ac aliquet eget, rutrum ut leo. Aenean ac ullamcorper ex.</string>
 </resources>

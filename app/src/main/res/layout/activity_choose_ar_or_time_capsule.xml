@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.logintesting.com.example.TimeSuler.Choose_ar_or_time_capsule">
+    tools:context="com.example.logintesting.Choose_ar_or_time_capsule">
 
     <ImageButton
         android:id="@+id/TimeCapsuleBut"

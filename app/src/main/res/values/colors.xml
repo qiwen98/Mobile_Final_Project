@@ -7,4 +7,5 @@
     <color name="cardcolor2">#FFEFFF</color>
     <color name="bglfzcolor">#FFF8EE</color>
     <color name="orange">#FFBB55</color>
+    <color name="bg_white">#ffffff</color>
 </resources>

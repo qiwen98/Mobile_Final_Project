@@ -134,6 +134,7 @@ public class NewTimeCapsuleActivity extends AppCompatActivity implements View.On
         Double  GoogleMapLocation_longitude = null;
         Timestamp ValidTimeStampForOpen=Timestamp.now();
         List <String> OpenedbyUser=null;
+        String Sender=mAuth.getCurrentUser().getEmail();
 
 
         if(ImageUrl!=null)
@@ -165,7 +166,7 @@ public class NewTimeCapsuleActivity extends AppCompatActivity implements View.On
 
         CollectionReference timecapsuleRef= FirebaseFirestore.getInstance()
                 .collection("TimeCapsuleBook");
-        timecapsuleRef.add(new TimeCapsule(title,description,priority,ImageDownloadURL,VideoDownloadURL,CapsuleType,Receiver,favouritebyUser,OpenedbyUser,SceneformKey,GoogleMapLocation_latitude,GoogleMapLocation_longitude,ValidTimeStampForOpen))
+        timecapsuleRef.add(new TimeCapsule(title,description,priority,ImageDownloadURL,VideoDownloadURL,CapsuleType,Sender,Receiver,favouritebyUser,OpenedbyUser,SceneformKey,GoogleMapLocation_latitude,GoogleMapLocation_longitude,ValidTimeStampForOpen))
         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {

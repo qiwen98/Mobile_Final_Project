@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -39,6 +40,7 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
     private CollectionReference TimeCapsuleRef=db.collection("TimeCapsuleBook");
 
     private  TimeCapsuleAdapter adapter;
+    private TimeLineAdapter TimelineAdapter;
 
     private  FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String TAG="TimeCapsuleNavigatePage";
@@ -52,6 +54,7 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
 
         setUpRecyclerView();
 
+        //setUpTimelineView();
 
 
 
@@ -67,7 +70,26 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
         });
     }
 
+    private void setUpTimelineView() {
 
+        Query query= TimeCapsuleRef.whereArrayContains("receiver", user.getEmail())
+                .orderBy("validTimeStampForOpen", Query.Direction.DESCENDING);
+
+        // Query query= TimeCapsuleRef.orderBy("priority",Query.Direction.DESCENDING);
+
+
+        FirestoreRecyclerOptions<TimeCapsule> options= new FirestoreRecyclerOptions.Builder<TimeCapsule>()
+                .setQuery(query,TimeCapsule.class)
+                .build();
+
+
+        TimelineAdapter=new TimeLineAdapter(options);
+        RecyclerView recyclerView=findViewById(R.id.Timeline_view);
+        recyclerView.setHasFixedSize(true);
+         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.setAdapter(adapter);
+    }
 
 
     @Override
@@ -149,6 +171,7 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
                 Timestamp timetoopen=timeCapsule.getValidTimeStampForOpen();
                 Timestamp CurrentTimeStamp=Timestamp.now();
                 String sceneformKey=timeCapsule.getSceneformKey();
+
                 adapter.setOpened(position);
 
 
