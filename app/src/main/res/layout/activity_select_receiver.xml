@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bglfzcolor"
     tools:context="com.example.logintesting.com.example.TimeSuler.SelectReceiverActivity">
 
 
@@ -14,14 +15,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
     />
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_receiver_button"
+    <Button
+        android:id="@+id/ButtonSelect_contact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="16dp"
-        app:borderWidth="0dp"
-        android:src="@drawable/ic_check"/>
+        android:layout_gravity="bottom|center"
+        android:text="@string/receiver_select"
+        android:background="@drawable/ciriclebutton"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:layout_marginBottom="10dp"
+
+        />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

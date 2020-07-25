@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,7 +56,8 @@ public class SelectReceiverActivity extends AppCompatActivity {
 
         mResultList = (RecyclerView) findViewById(R.id.receiver_recycler_view);
 
-        FloatingActionButton buttoncompletereceiver=findViewById(R.id.floating_receiver_button);
+
+        Button buttoncompletereceiver=findViewById(R.id.ButtonSelect_contact);
         buttoncompletereceiver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
