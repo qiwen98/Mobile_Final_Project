@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_on_beach"
-    tools:context="com.example.logintesting.com.example.TimeSuler.MainActivity">
+    tools:context="com.example.logintesting.MainActivity">
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/fb_login_button"

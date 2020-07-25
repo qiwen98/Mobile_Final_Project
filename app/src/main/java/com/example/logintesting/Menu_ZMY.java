@@ -15,16 +15,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Menu_ZMY extends AppCompatActivity {
 
-    Toolbar toolbar;
+    //Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu__z_m_y);
-
+/*
         toolbar = (Toolbar) findViewById(R.id.HomeToolBar);
         setSupportActionBar(toolbar);
-
+*/
         //Initialize and assign variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
@@ -56,10 +56,12 @@ public class Menu_ZMY extends AppCompatActivity {
         });
     }
 
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.user_icon_in_home_tool_bar, menu);
         return true;
     }
+    */
 }
