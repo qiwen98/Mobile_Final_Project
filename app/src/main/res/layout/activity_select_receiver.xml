@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bglfzcolor"
-    tools:context="com.example.logintesting.com.example.TimeSuler.SelectReceiverActivity">
+    tools:context="com.example.logintesting.SelectReceiverActivity">
 
 
 

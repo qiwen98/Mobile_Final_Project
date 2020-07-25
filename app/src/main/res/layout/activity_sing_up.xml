@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.logintesting.com.example.TimeSuler.SingUpActivity">
+    tools:context="com.example.logintesting.SingUpActivity">
 
     <EditText
         android:id="@+id/PasswordReg"
