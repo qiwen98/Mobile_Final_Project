@@ -4,23 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/login_page_bg_onbeach"
+    android:background="@drawable/login_on_beach"
     tools:context="com.example.logintesting.com.example.TimeSuler.MainActivity">
-
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/google_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="158dp"
-        android:layout_marginTop="702dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginBottom="28dp"
-
-        app:layout_constraintBottom_toTopOf="@+id/SignOut_But"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/fb_login_button"
@@ -28,51 +13,68 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="178dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/google_button"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.826" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/google_button"
+        android:layout_width="147dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="18dp"
+
+        android:layout_marginEnd="36dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fb_login_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/fb_login_button"
+        app:layout_constraintTop_toTopOf="@+id/fb_login_button"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/Login_Button"
         android:layout_width="174dp"
-        android:layout_height="0dp"
-
+        android:layout_height="50dp"
         android:layout_marginTop="594dp"
-        android:layout_marginBottom="153dp"
+
+        android:background="@drawable/signin_btn_rectangle"
         android:text="@string/login"
-        app:layout_constraintBottom_toTopOf="@+id/SignUp_But"
+        app:layout_constraintBottom_toTopOf="@+id/fb_login_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/SignUp_But"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="19dp"
         android:layout_marginBottom="24dp"
         android:text="Sign Up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.265"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/Login_Button" />
+        app:layout_constraintTop_toBottomOf="@+id/Login_Button"
+        app:layout_constraintVertical_bias="0.972" />
 
     <EditText
         android:id="@+id/EmailAddress"
         android:layout_width="348dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="402dp"
-        android:layout_marginBottom="330dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="416dp"
+        android:layout_marginEnd="24dp"
         android:autofillHints=""
         android:drawableStart="@drawable/password_email_outlined"
         android:ems="10"
         android:hint="@string/email_hint"
         android:inputType="textEmailAddress"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/SignUp_But"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -81,7 +83,6 @@
         android:id="@+id/Password"
         android:layout_width="348dp"
         android:layout_height="60dp"
-        android:layout_marginTop="15dp"
         android:layout_marginBottom="58dp"
         android:autofillHints=""
         android:drawableStart="@drawable/password_email"
@@ -100,8 +101,8 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginBottom="40dp"
         android:text="@string/signup_textview"
         android:textAlignment="center"
         android:textSize="18sp"
@@ -113,11 +114,15 @@
         android:id="@+id/SignOut_But"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginBottom="86dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="Sign Out"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/google_button"
-        app:layout_constraintTop_toBottomOf="@+id/google_button" />
+        app:layout_constraintTop_toBottomOf="@+id/google_button"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
