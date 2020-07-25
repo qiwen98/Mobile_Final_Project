@@ -21,6 +21,7 @@ public class Menu_ZMY extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu__z_m_y);
+        setTitle("              Home");
 /*
         toolbar = (Toolbar) findViewById(R.id.HomeToolBar);
         setSupportActionBar(toolbar);
