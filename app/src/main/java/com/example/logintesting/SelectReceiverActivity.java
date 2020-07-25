@@ -132,7 +132,7 @@ public class SelectReceiverActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         model.setSelected(!model.isSelected());
-                        holder.Receiver_background.setBackgroundColor(model.isSelected() ? Color.CYAN : Color.WHITE);
+                        holder.Receiver_background.setBackgroundColor(model.isSelected() ? Color.parseColor("#f4a460")  : Color.parseColor("#FFEFDB"));
                         if(model.isSelected()==true)
                         {
                             Log.d(TAG, "onClick: savereceiver"+model.getEmail());
