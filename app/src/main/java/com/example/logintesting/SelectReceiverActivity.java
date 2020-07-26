@@ -51,7 +51,7 @@ public class SelectReceiverActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_receiver);
 
-        setTitle("Select Receiver");
+        setTitle("                           Select Receiver");
         TimecapsuleRef_ID=getIntent().getStringExtra("TimecapsuleRefID");
 
         mResultList = (RecyclerView) findViewById(R.id.receiver_recycler_view);

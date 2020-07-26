@@ -30,7 +30,7 @@ public class Menu_ZMY extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu__z_m_y);
-        setTitle("                                   Home");
+        setTitle("                                    Home");
 
         received=findViewById(R.id.btn_received);
         sent=findViewById(R.id.btn_sent);

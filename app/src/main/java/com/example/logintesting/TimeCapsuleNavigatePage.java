@@ -50,7 +50,7 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_capsule_navigate_page);
-        setTitle("Received Capsules");
+        setTitle("                        Received Capsules");
 
         setUpRecyclerView();
 

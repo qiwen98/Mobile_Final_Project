@@ -23,16 +23,44 @@ tools:context=".Menu_ZMY">
     android:id="@+id/imageView"
     android:layout_width="265dp"
     android:layout_height="514dp"
-    android:layout_marginTop="90dp"
+    android:layout_marginTop="82dp"
     android:layout_marginLeft="-95dp"
     app:srcCompat="@drawable/ring" />
+
+    <Button
+        android:id="@+id/btn_received2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="83dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/home_selector_received2"
+        android:fontFamily="sans-serif-light"
+        android:text="Received"
+        android:textAllCaps="false"
+        android:textColor="@drawable/btn_text_change_color"
+        android:textSize="30sp"
+        android:textStyle="italic" />
+
+    <Button
+        android:id="@+id/btn_received1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="83dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/home_selector_received1"
+        android:fontFamily="sans-serif-light"
+        android:text="Received"
+        android:textAllCaps="false"
+        android:textColor="@drawable/btn_text_change_color"
+        android:textSize="30sp"
+        android:textStyle="italic" />
 
     <Button
         android:id="@+id/btn_received"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="90dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="35dp"
         android:background="@drawable/home_selector_received"
         android:fontFamily="sans-serif-light"
         android:text="Received"
@@ -42,11 +70,40 @@ tools:context=".Menu_ZMY">
         android:textStyle="italic" />
 
     <Button
+        android:id="@+id/btn_sent2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="108dp"
+        android:layout_marginTop="247dp"
+        android:background="@drawable/home_selector_sent2"
+        android:fontFamily="sans-serif-light"
+        android:text="Sent"
+        android:textAllCaps="false"
+        android:textColor="@drawable/btn_text_change_color"
+        android:textSize="30sp"
+        android:textStyle="italic" />
+
+    <Button
+        android:id="@+id/btn_sent1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="108dp"
+        android:layout_marginTop="245dp"
+        android:background="@drawable/home_selector_sent1"
+        android:fontFamily="sans-serif-light"
+        android:text="Sent"
+        android:textAllCaps="false"
+        android:textColor="@drawable/btn_text_change_color"
+        android:textSize="30sp"
+        android:textStyle="italic" />
+
+
+    <Button
         android:id="@+id/btn_sent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="120dp"
-        android:layout_marginTop="277dp"
+        android:layout_marginTop="270dp"
         android:background="@drawable/home_selector_sent"
         android:fontFamily="sans-serif-light"
         android:text="Sent"
@@ -56,11 +113,39 @@ tools:context=".Menu_ZMY">
         android:textStyle="italic" />
 
     <Button
+        android:id="@+id/btn_favourite2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="450dp"
+        android:background="@drawable/home_selector_favourite2"
+        android:fontFamily="sans-serif-light"
+        android:text="Favourites"
+        android:textAllCaps="false"
+        android:textColor="@drawable/btn_text_change_color"
+        android:textSize="30sp"
+        android:textStyle="italic" />
+
+    <Button
+        android:id="@+id/btn_favourite1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="450dp"
+        android:background="@drawable/home_selector_favourite1"
+        android:fontFamily="sans-serif-light"
+        android:text="Favourites"
+        android:textAllCaps="false"
+        android:textColor="@drawable/btn_text_change_color"
+        android:textSize="30sp"
+        android:textStyle="italic" />
+
+    <Button
         android:id="@+id/btn_favourite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="90dp"
-        android:layout_marginTop="484dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="450dp"
         android:background="@drawable/home_selector_favourite"
         android:fontFamily="sans-serif-light"
         android:text="Favourites"

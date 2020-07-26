@@ -44,7 +44,7 @@ public class TimeCapsuleNavigatePage_Sent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_capsule_navigate_sent_page);
-        setTitle("Sent Capsules");
+        setTitle("                            Sent Capsules");
 
         setUpRecyclerView();
 

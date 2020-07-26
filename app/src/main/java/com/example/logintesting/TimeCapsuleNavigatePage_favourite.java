@@ -44,7 +44,7 @@ public class TimeCapsuleNavigatePage_favourite extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_capsule_navigate_page);
-        setTitle("Favourite Capsules");
+        setTitle("                        Favourite Capsules");
 
         setUpRecyclerView();
 
@@ -126,7 +126,7 @@ public class TimeCapsuleNavigatePage_favourite extends AppCompatActivity {
     }
 
     private void setUpRecyclerView() {
-        Query query= TimeCapsuleRef.whereArrayContains("favouritebyUser", user.getEmail())
+        Query query= TimeCapsuleRef.whereArrayContains("favouritebyUser", user.getUid())
                 .orderBy("validTimeStampForOpen", Query.Direction.DESCENDING);
 
         // Query query= TimeCapsuleRef.orderBy("priority",Query.Direction.DESCENDING);
