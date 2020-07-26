@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import java.io.Serializable;
@@ -12,9 +13,9 @@ import java.util.List;
 
 public class Choose_ar_or_time_capsule extends AppCompatActivity implements View.OnClickListener {
 
-    private ImageButton ButtonForAR;
+    private Button ButtonForAR;
 
-    private ImageButton ButtonForTime;
+    private Button ButtonForTime;
     private String TimecapsuleRef_ID;
     private List<String>receiverList;
     @Override
