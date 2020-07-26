@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -79,7 +80,7 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
         holder.textViewTitle.setText(model.getTitle());
         holder.textViewDescription.setText(model.getDescription());
         /*holder.textViewPriority.setText(String.valueOf(model.getPriority()));*/
-        holder.textViewDescription.setOnClickListener(new View.OnClickListener() {
+        holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(model.getFavouritebyUser()!=null) {
@@ -122,7 +123,8 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
             if(model.getFavouritebyUser().contains(user.getUid()))
             {
                 //  holder.textViewTitle.setText("AR");
-                holder.textViewTitle.setText("favoutie");
+                holder.textViewTitle.setText("FAVOURITE");
+                holder.cardView.setCardBackgroundColor(Color.parseColor("#FFC1C1"));
             }
         }
 
@@ -230,6 +232,7 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
         TextView textViewPriority;
         ImageView ImageViewPhoto;
         CardView cardView;
+        Button button;
 
         public  TimeCapsuleHolder(View itemView){
             super(itemView);
@@ -238,6 +241,7 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
             //textViewPriority=itemView.findViewById(R.id.text_view_priority);
             ImageViewPhoto=itemView.findViewById(R.id.imageView_photo);
             cardView=itemView.findViewById(R.id.capsule_background);
+            button=itemView.findViewById(R.id.favouritebut);
 
 
 

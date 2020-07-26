@@ -1,14 +1,5 @@
 package com.example.logintesting;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,9 +7,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -32,10 +29,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-public class TimeCapsuleNavigatePage extends AppCompatActivity {
+public class TimeCapsuleNavigatePage_favourite extends AppCompatActivity {
 
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
     private CollectionReference TimeCapsuleRef=db.collection("TimeCapsuleBook");
@@ -50,7 +44,7 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_capsule_navigate_page);
-        setTitle("Received Capsules");
+        setTitle("Favourite Capsules");
 
         setUpRecyclerView();
 
@@ -64,7 +58,7 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                Intent intent=new Intent(TimeCapsuleNavigatePage.this, NewTimeCapsuleActivity.class);
+                Intent intent=new Intent(TimeCapsuleNavigatePage_favourite.this, NewTimeCapsuleActivity.class);
                 startActivity(intent);
             }
         });
@@ -100,28 +94,6 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
         });
     }
 
-    private void setUpTimelineView() {
-
-        Query query= TimeCapsuleRef.whereArrayContains("receiver", user.getEmail())
-                .orderBy("validTimeStampForOpen", Query.Direction.DESCENDING);
-
-        // Query query= TimeCapsuleRef.orderBy("priority",Query.Direction.DESCENDING);
-
-
-        FirestoreRecyclerOptions<TimeCapsule> options= new FirestoreRecyclerOptions.Builder<TimeCapsule>()
-                .setQuery(query,TimeCapsule.class)
-                .build();
-
-
-        TimelineAdapter=new TimeLineAdapter(options);
-        RecyclerView recyclerView=findViewById(R.id.Timeline_view);
-        recyclerView.setHasFixedSize(true);
-         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
-        recyclerView.setAdapter(adapter);
-    }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater= getMenuInflater();
@@ -154,7 +126,7 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
     }
 
     private void setUpRecyclerView() {
-        Query query= TimeCapsuleRef.whereArrayContains("receiver", user.getEmail())
+        Query query= TimeCapsuleRef.whereArrayContains("favouritebyUser", user.getEmail())
                 .orderBy("validTimeStampForOpen", Query.Direction.DESCENDING);
 
         // Query query= TimeCapsuleRef.orderBy("priority",Query.Direction.DESCENDING);
@@ -209,7 +181,7 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
                 Timestamp timestamp=timeCapsule.getValidTimeStampForOpen();
                 String description=timeCapsule.getDescription();
 
-                Toast.makeText(TimeCapsuleNavigatePage.this,"Position: "+position+" and ID "+id+" and Title "+title+ latitude,Toast.LENGTH_LONG).show();
+                Toast.makeText(TimeCapsuleNavigatePage_favourite.this,"Position: "+position+" and ID "+id+" and Title "+title+ latitude,Toast.LENGTH_LONG).show();
 
 
 
@@ -217,7 +189,7 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
                {
                    LatLng Time_Capsule_latling=new LatLng(latitude, longtitude);
 
-                   Intent intent = new Intent(TimeCapsuleNavigatePage.this, Map_Activity.class);
+                   Intent intent = new Intent(TimeCapsuleNavigatePage_favourite.this, Map_Activity.class);
                    intent.putExtra("Location", Time_Capsule_latling);
                    intent.putExtra("AnchorID",sceneformKey );
                    intent.putExtra("Video_URL", VideoURL);
@@ -233,13 +205,13 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
                        Log.d(TAG, "onItemClick: the compare is over");
                        if(!VideoURL.isEmpty())
                        {
-                           Intent intent = new Intent(TimeCapsuleNavigatePage.this, PlayerActivity.class);
+                           Intent intent = new Intent(TimeCapsuleNavigatePage_favourite.this, PlayerActivity.class);
                            intent.putExtra("Video_URL", VideoURL);
                            startActivity(intent);
                        }
                        else
                        {
-                           Toast.makeText(TimeCapsuleNavigatePage.this,"this time capsule is empty",Toast.LENGTH_LONG).show();
+                           Toast.makeText(TimeCapsuleNavigatePage_favourite.this,"this time capsule is empty",Toast.LENGTH_LONG).show();
                        }
 
                    }
@@ -248,7 +220,7 @@ public class TimeCapsuleNavigatePage extends AppCompatActivity {
                        Log.d(TAG, "onItemClick: you cannot open yet "+CurrentTimeStamp+"   "+timetoopen);
                        // this is how to create a date
 
-                       Toast.makeText(TimeCapsuleNavigatePage.this,"You cannot open yet",Toast.LENGTH_LONG).show();
+                       Toast.makeText(TimeCapsuleNavigatePage_favourite.this,"You cannot open yet",Toast.LENGTH_LONG).show();
 
 
                    }
