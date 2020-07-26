@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -109,7 +110,7 @@ public class Map_Activity extends AppCompatActivity {
 
                             if(Distance[0]<10)
                             {
-                                Toast.makeText(Map_Activity.this, "unlock time capsule",
+                                Toast.makeText(Map_Activity.this, "You have found a time capsule !",
                                         Toast.LENGTH_SHORT).show();
 
                                 String sceneformkey=getIntent().getStringExtra("AnchorID");
@@ -119,7 +120,18 @@ public class Map_Activity extends AppCompatActivity {
                                 intent.putExtra("Activity", "Map_Activity");
                                 intent.putExtra("AnchorID", sceneformkey);
                                 intent.putExtra("Video_URL", VideoURL);
-                                startActivity(intent);
+
+                                Handler mHandler = new Handler();
+                                mHandler.postDelayed(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        startActivity(intent);
+                                    }
+
+                                }, 4000L);
+
+
                             }
 
                         }

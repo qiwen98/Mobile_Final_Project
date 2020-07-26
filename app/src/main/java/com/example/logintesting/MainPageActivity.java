@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,11 +27,13 @@ import com.squareup.picasso.Picasso;
 
 public class MainPageActivity extends AppCompatActivity {
 
-    private Button Resend_code_but;
+    private Button Resend_code_but, Signout_but;
     TextView Verify_Msg_TextView,NameView,EmailView;
     ImageView profileImage;
     private StorageReference mStorageRef;
     Button TimeCapsule_but,Timeline_but,Menu_but;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
 
     private static final String TAG = "MainPageActivity";
@@ -47,10 +50,36 @@ public class MainPageActivity extends AppCompatActivity {
         TimeCapsule_but = (Button) findViewById(R.id.TimeCapsule);
         Timeline_but = (Button) findViewById(R.id.Timeline);
         Menu_but = (Button) findViewById(R.id.btn_navi);
+        Signout_but=(Button) findViewById(R.id.sign_out);
         mStorageRef = FirebaseStorage.getInstance().getReference();
+
+        mAuth = FirebaseAuth.getInstance();
 
 
         getUserProfile();
+
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    toastMessage("Successfully signed in with: " + user.getEmail());
+                    // gotofirstpage();
+
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                    toastMessage("Successfully signed out.");
+                    gotologinpage();
+                }
+                // ...
+            }
+        };
+
+
 
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,9 +110,23 @@ public class MainPageActivity extends AppCompatActivity {
                 gotomenupage();
             }
         });
+
+        Signout_but.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               signout();
+            }
+        });
     }
 
-
+    private void signout() {
+        mAuth.signOut();
+        LoginManager.getInstance().logOut();
+      //  toastMessage("Signing Out...");
+    }
+    private void toastMessage(String message){
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -191,4 +234,27 @@ public class MainPageActivity extends AppCompatActivity {
         Intent intent=new Intent(MainPageActivity.this, Menu_ZMY.class);
         startActivity(intent);
     }
+
+    private void gotologinpage() {
+        Intent intent=new Intent(MainPageActivity.this,MainActivity.class);
+        startActivity(intent);
+    }
+
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+
 }
