@@ -267,7 +267,7 @@ public class ARactivity<placeModel> extends AppCompatActivity {
     private void createModel(Anchor anchor) {
 
         ModelRenderable.builder()
-                .setSource(this, Uri.parse("andy.sfb"))
+                .setSource(this, Uri.parse("gift.sfb"))
                 .build()
                 .thenAccept(modelRenderable -> addModelToScene(anchor,modelRenderable))
                 .exceptionally(
