@@ -27,6 +27,7 @@
         <activity android:name=".DatePickPage" />
         <activity android:name=".Map_Activity" />
         <activity android:name=".Choose_ar_or_time_capsule" />
+        <activity android:name=".ContactActivity" />
         <activity android:name=".ARactivity" />
         <activity android:name=".PlayerActivity" />
         <activity

@@ -58,7 +58,7 @@ public class TimeLineActivity extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.contact:
-                        startActivity(new Intent(getApplicationContext(),SelectReceiverActivity.class));
+                        startActivity(new Intent(getApplicationContext(),ContactActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.timeline:
