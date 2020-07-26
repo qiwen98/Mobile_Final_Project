@@ -1,44 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context="com.example.logintesting.NewTimeCapsuleActivity">
+    tools:context="com.example.logintesting.NewTimeCapsuleActivity"
+    android:background="@color/bglfzcolor">
+
     <EditText
         android:id="@+id/edit_text_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:hint="Title"
-        android:inputType="text"/>
+        android:inputType="text"
+        android:paddingTop="5dp"
+        android:paddingLeft="8dp"
+        android:paddingBottom="20dp"
+        android:background="@drawable/edittext1"/>
 
     <EditText
         android:id="@+id/edit_text_description"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="145dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/edittext1"
         android:hint="Description"
-        android:inputType="textMultiLine"/>
+        android:inputType="textMultiLine"
+        android:paddingLeft="8dp"
+        android:paddingBottom="60dp" />
 
     <ImageButton
         android:id="@+id/ImageUpload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_upload_photo" />
+        android:layout_width="200dp"
+        android:layout_height="390dp"
+        android:layout_gravity="center|right"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="270dp"
+        android:alpha="0.6"
+        app:srcCompat="@drawable/ic_upload_photo"
+        android:background="@drawable/imageupload_but"/>
 
     <ImageButton
         android:id="@+id/VideoUpload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_upload_video" />
+        android:layout_width="200dp"
+        android:layout_height="390dp"
+        android:layout_gravity="center|left"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="270dp"
+        android:alpha="0.6"
+        app:srcCompat="@drawable/ic_upload_video"
+        android:background="@drawable/videoupload_but"/>
 
     <com.mikhaellopez.circularprogressbar.CircularProgressBar
         android:id="@+id/circularProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="380dp"
+        android:layout_height="380dp"
+        android:layout_marginTop="260dp"
+        android:layout_gravity="center"
         app:cpb_background_progressbar_color="#b6bbd8"
-        app:cpb_background_progressbar_width="5dp"
+        app:cpb_background_progressbar_width="3dp"
         app:cpb_progress_direction="to_right"
         app:cpb_progressbar_color="#3f51b5"
         app:cpb_progressbar_width="10dp"
@@ -46,4 +69,4 @@
 
 
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

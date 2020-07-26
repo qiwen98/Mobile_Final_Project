@@ -78,8 +78,8 @@ public class NewTimeCapsuleActivity extends AppCompatActivity implements View.On
         mediaController=new MediaController(this);
         mProgressBar =  findViewById(R.id.circularProgressBar);
         // or with gradient
-        mProgressBar.setProgressBarColorStart(Color.GRAY)  ;
-        mProgressBar.setProgressBarColorEnd(Color.RED);
+        mProgressBar.setProgressBarColorStart(Color.parseColor("#b6bbd8")) ;
+        mProgressBar.setProgressBarColorEnd(Color.WHITE);
         mProgressBar.setProgressBarColorDirection(CircularProgressBar.GradientDirection.TOP_TO_BOTTOM);
 
        /*numberPickerPriority.setMinValue(1);
