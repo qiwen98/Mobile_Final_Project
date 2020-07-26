@@ -52,7 +52,7 @@ public class ARactivity<placeModel> extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     int tap_amount=0;
 
-   // SupportMapFragment supportMapFragment;
+    // SupportMapFragment supportMapFragment;
     FusedLocationProviderClient client;
     LatLng Current_loc_latLng;
 
@@ -78,7 +78,7 @@ public class ARactivity<placeModel> extends AppCompatActivity {
         client = LocationServices.getFusedLocationProviderClient(this);
 
 
-            getCurrentLocation();
+        getCurrentLocation();
 
 
 
@@ -136,11 +136,11 @@ public class ARactivity<placeModel> extends AppCompatActivity {
             {
 
 
-              //  anchor=arFragment.getArSceneView().getSession().hostCloudAnchor(hitResult.createAnchor());
+                //  anchor=arFragment.getArSceneView().getSession().hostCloudAnchor(hitResult.createAnchor());
                 appAnchorState=AppAnchorState.HOSTING;
                 showToast("Uplaoding...");
 
-               // createModel(anchor);
+                // createModel(anchor);
                 isPlaced=true;
             }
 
@@ -166,11 +166,11 @@ public class ARactivity<placeModel> extends AppCompatActivity {
                 //here changed to firebase id
                 editor.putString("AnchorID",anchorID);
                 editor.apply();;
-               // showToast("Anchor Hosted succesfully. Anchor Id " +anchorID);
+                // showToast("Anchor Hosted succesfully. Anchor Id " +anchorID);
 
                 if(!anchorID.isEmpty()&&Current_loc_latLng!=null)
                 {
-                   // showToast("Anchor Hosted succesfully. Anchor Id " +anchorID);
+                    // showToast("Anchor Hosted succesfully. Anchor Id " +anchorID);
 
                     updatetheTimeCapsule(anchorID);
                 }
@@ -236,7 +236,7 @@ public class ARactivity<placeModel> extends AppCompatActivity {
                         "googleMapLocation_latitude",Current_loc_latLng.latitude,
                         "googleMapLocation_longitude",Current_loc_latLng.longitude,
                         "receiver", receiverList
-                        )
+                )
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -280,7 +280,7 @@ public class ARactivity<placeModel> extends AppCompatActivity {
     private void placeModel(Anchor anchor,ModelRenderable modelRenderable)
     {
         AnchorNode anchorNode=new AnchorNode(anchor);
-       anchorNode.setRenderable(modelRenderable);
+        anchorNode.setRenderable(modelRenderable);
         arFragment.getArSceneView().getScene().addChild(anchorNode);
 
     }
@@ -307,7 +307,7 @@ public class ARactivity<placeModel> extends AppCompatActivity {
             if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                     android.Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
-               // locationPermissionGranted = true;
+                // locationPermissionGranted = true;
             } else {
                 ActivityCompat.requestPermissions(this,
                         new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
@@ -326,7 +326,7 @@ public class ARactivity<placeModel> extends AppCompatActivity {
             public void onSuccess(Location location) {
 
                 Log.d(TAG, "onMapReady: record location done ");
-                 Current_loc_latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                Current_loc_latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
 
 
