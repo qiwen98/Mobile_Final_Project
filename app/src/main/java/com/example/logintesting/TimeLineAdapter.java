@@ -39,6 +39,7 @@ public class TimeLineAdapter extends FirestoreRecyclerAdapter<TimeCapsule, TimeL
 
     private  Context context;
     private  List<TimeCapsule>timeCapsuleList,timeCapsuleFilteredList;
+    private List<String> receivers=new ArrayList<>();
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
    // private final ObservableSnapshotArray<TimeCapsule> mSnapshots;
@@ -75,7 +76,12 @@ public class TimeLineAdapter extends FirestoreRecyclerAdapter<TimeCapsule, TimeL
         //TimeCapsule timeCapsule= pictureList.get(position);
 
         holder.timeline_text_time.setText(converttodate(model.getValidTimeStampForOpen()));
-        holder.timeline_item_description.setText(setinfo(model.getReceiver(),model.getCapsuleType(),model.getValidTimeStampForOpen()));
+        if(!model.getSender().isEmpty())
+        {
+
+            holder.timeline_item_description.setText(setinfo(model.getReceiver(),model.getCapsuleType(),model.getValidTimeStampForOpen()));
+        }
+
 
         if(model.getImageDownloadURL().isEmpty())
         {
@@ -112,7 +118,7 @@ public class TimeLineAdapter extends FirestoreRecyclerAdapter<TimeCapsule, TimeL
 
     }
 
-    private String setinfo(List receivers,String Capsuletype, Timestamp timestamp) {
+    private String setinfo(List<String>receivers ,String Capsuletype, Timestamp timestamp) {
 
         Date date=timestamp.toDate();
         DateFormat.getDateInstance(DateFormat.SHORT).format(date);
@@ -125,6 +131,7 @@ public class TimeLineAdapter extends FirestoreRecyclerAdapter<TimeCapsule, TimeL
         }
 
         return "you have sent a "+Capsuletype+" to "+receivers.toString()+" on "+stringdate;
+     //   return "122";
     }
 
     private String converttodate(Timestamp timestamp) {

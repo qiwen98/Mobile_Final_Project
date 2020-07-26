@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -117,6 +118,23 @@ public class SingUpActivity extends AppCompatActivity {
                             documentReference=db.collection("users").document(userID);
                             Map<String,Object> userObj=new HashMap<>();
                             userObj.put("email",email);
+                            userObj.put("name","usersrandom");
+
+
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName("Jane Q. User")
+                                    .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
+                                    .build();
+
+                            user.updateProfile(profileUpdates)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d(TAG, "User profile updated.");
+                                            }
+                                        }
+                                    });
 
                             documentReference.set(userObj).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
