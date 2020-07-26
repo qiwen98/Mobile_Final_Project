@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/loginbgphoto"
     tools:context="com.example.logintesting.MainPageActivity">
 
     <ImageView
@@ -11,14 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="141dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="142dp"
         android:layout_marginBottom="55dp"
+        android:src="@mipmap/ic_launcher"
         app:layout_constraintBottom_toTopOf="@+id/EmailView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@mipmap/ic_launcher" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/Verify_Msg_TextView"
@@ -49,6 +50,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Email"
+        android:background="@drawable/translucent"
         app:layout_constraintBottom_toTopOf="@+id/NameView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -75,13 +77,14 @@
         android:id="@+id/NameView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="110dp"
+        android:layout_marginStart="108dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="92dp"
+        android:layout_marginEnd="93dp"
         android:layout_marginBottom="356dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
+        android:background="@drawable/translucent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -89,45 +92,17 @@
         app:layout_constraintTop_toBottomOf="@+id/EmailView" />
 
     <Button
-        android:id="@+id/TimeCapsule"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="157dp"
-        android:layout_marginEnd="159dp"
-        android:layout_marginBottom="146dp"
-        android:text="TimeCapsule"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NameView"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/Timeline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="159dp"
-        android:layout_marginBottom="56dp"
-        android:text="Timeline"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TimeCapsule" />
-
-    <Button
         android:id="@+id/btn_navi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome"
-        app:layout_constraintBottom_toTopOf="@+id/TimeCapsule"
+        android:background="@drawable/ciriclebutton"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NameView" />
+        app:layout_constraintTop_toBottomOf="@+id/NameView"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"/>
 
     <Button
         android:id="@+id/sign_out"
@@ -135,11 +110,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="239dp"
-        android:layout_marginEnd="45dp"
         android:layout_marginBottom="52dp"
         android:text="Signout"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Timeline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NameView" />
 

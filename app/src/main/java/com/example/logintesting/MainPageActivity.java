@@ -31,7 +31,7 @@ public class MainPageActivity extends AppCompatActivity {
     TextView Verify_Msg_TextView,NameView,EmailView;
     ImageView profileImage;
     private StorageReference mStorageRef;
-    Button TimeCapsule_but,Timeline_but,Menu_but;
+    Button Menu_but;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -47,8 +47,6 @@ public class MainPageActivity extends AppCompatActivity {
         EmailView=(TextView)findViewById(R.id.EmailView);
         NameView=(TextView)findViewById(R.id.NameView);
         profileImage=(ImageView) findViewById(R.id.PhotoView);
-        TimeCapsule_but = (Button) findViewById(R.id.TimeCapsule);
-        Timeline_but = (Button) findViewById(R.id.Timeline);
         Menu_but = (Button) findViewById(R.id.btn_navi);
         Signout_but=(Button) findViewById(R.id.sign_out);
         mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -87,20 +85,6 @@ public class MainPageActivity extends AppCompatActivity {
                 //open gallery
                 Intent openGalleryIntent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(openGalleryIntent,1000);
-            }
-        });
-
-        TimeCapsule_but.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              gototimecapsulepage();
-            }
-        });
-
-        Timeline_but.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gototimelinepage();
             }
         });
 
@@ -217,17 +201,6 @@ public class MainPageActivity extends AppCompatActivity {
         }
 
         // [END get_user_profile]
-    }
-
-    private void gototimecapsulepage()
-    {
-        Intent intent=new Intent(MainPageActivity.this, TimeCapsuleNavigatePage.class);
-        startActivity(intent);
-    }
-
-    private void gototimelinepage() {
-        Intent intent=new Intent(MainPageActivity.this, TimeLineActivity.class);
-        startActivity(intent);
     }
 
     private void gotomenupage() {
