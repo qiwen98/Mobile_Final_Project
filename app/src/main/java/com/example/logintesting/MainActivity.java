@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mEmail = (EditText) findViewById(R.id.EmailAddress);
         mPassword = (EditText) findViewById(R.id.Password);
         btnSignIn = (Button) findViewById(R.id.Login_Button);
-        btnSignOut = (Button) findViewById(R.id.SignOut_But);
+        // = (Button) findViewById(R.id.SignOut_But);
         //btnSignOut = (Button) findViewById(R.id.SignOut_But);
         btnSignUp = (Button) findViewById(R.id.SignUp_But);
         google_button= findViewById(R.id.google_button);
@@ -106,8 +106,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 } else {
                     // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-                    toastMessage("Successfully signed out.");
+                   /* Log.d(TAG, "onAuthStateChanged:signed_out");
+                    toastMessage("Successfully signed out.");*/
                 }
                 // ...
             }
@@ -138,14 +138,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        btnSignOut.setOnClickListener(new View.OnClickListener() {
+       /* btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mAuth.signOut();
                 toastMessage("Signing Out...");
 
             }
-        });
+        });*/
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
        google_button.setOnClickListener(this);
         btnSignUp.setOnClickListener(this);
         btnSignIn.setOnClickListener(this);
-        btnSignOut.setOnClickListener(this);
+        /*btnSignOut.setOnClickListener(this);*/
 
 
 
@@ -182,11 +182,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //toastMessage("go sign up page...");
                 break;
             // ...
-            case R.id.SignOut_But:
+            /*case R.id.SignOut_But:
                 mAuth.signOut();
                 LoginManager.getInstance().logOut();
                 toastMessage("Signing Out...");
-                break;
+                break;*/
 
             case R.id.Login_Button:
                 String email = mEmail.getText().toString();
