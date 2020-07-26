@@ -72,7 +72,7 @@ public class NewTimeCapsuleActivity extends AppCompatActivity implements View.On
 
         editTextTitle=findViewById(R.id.edit_text_title);
         editTextDescription=findViewById(R.id.edit_text_description);
-       numberPickerPriority=findViewById(R.id.number_picker_priority);
+       /*numberPickerPriority=findViewById(R.id.number_picker_priority);*/
        ButtonForImage=findViewById(R.id.ImageUpload);
         ButtonForVideo=findViewById(R.id.VideoUpload);
         mediaController=new MediaController(this);
@@ -82,8 +82,8 @@ public class NewTimeCapsuleActivity extends AppCompatActivity implements View.On
         mProgressBar.setProgressBarColorEnd(Color.RED);
         mProgressBar.setProgressBarColorDirection(CircularProgressBar.GradientDirection.TOP_TO_BOTTOM);
 
-       numberPickerPriority.setMinValue(1);
-       numberPickerPriority.setMaxValue(10);
+       /*numberPickerPriority.setMinValue(1);
+       numberPickerPriority.setMaxValue(10);*/
 
         ButtonForImage.setOnClickListener(this);
         ButtonForVideo.setOnClickListener(this);
@@ -123,7 +123,7 @@ public class NewTimeCapsuleActivity extends AppCompatActivity implements View.On
     private void saveNote() {
         String title=editTextTitle.getText().toString();
         String description=editTextDescription.getText().toString();
-        int priority=numberPickerPriority.getValue();
+        int priority=1;
         String ImageDownloadURL;
         String VideoDownloadURL;
         String CapsuleType="";

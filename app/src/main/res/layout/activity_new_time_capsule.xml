@@ -20,16 +20,6 @@
         android:layout_height="wrap_content"
         android:hint="Description"
         android:inputType="textMultiLine"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Priority:"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
-
-    <NumberPicker
-        android:id="@+id/number_picker_priority"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
     <ImageButton
         android:id="@+id/ImageUpload"

@@ -78,7 +78,7 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
 
         holder.textViewTitle.setText(model.getTitle());
         holder.textViewDescription.setText(model.getDescription());
-        holder.textViewPriority.setText(String.valueOf(model.getPriority()));
+        /*holder.textViewPriority.setText(String.valueOf(model.getPriority()));*/
         holder.textViewDescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +103,7 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
         if(model.getCapsuleType().equals("ArCapsule"))
         {
           //  holder.textViewTitle.setText("AR");
-            holder.cardView.setCardBackgroundColor(Color.parseColor("#E6E6E6"));
+            holder.cardView.setCardBackgroundColor(Color.parseColor("#EE6363"));
         }
 
 
@@ -112,7 +112,7 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
             if(model.getOpenedbyUser().contains(user.getUid()))
             {
                 //  holder.textViewTitle.setText("AR");
-                holder.cardView.setCardBackgroundColor(Color.RED);
+                holder.cardView.setCardBackgroundColor(Color.parseColor("#EEDFCC"));
             }
         }
 
@@ -235,7 +235,7 @@ public class TimeCapsuleAdapter  extends FirestoreRecyclerAdapter<TimeCapsule,Ti
             super(itemView);
             textViewTitle=itemView.findViewById(R.id.text_view_title);
             textViewDescription=itemView.findViewById(R.id.text_view_description);
-            textViewPriority=itemView.findViewById(R.id.text_view_priority);
+            //textViewPriority=itemView.findViewById(R.id.text_view_priority);
             ImageViewPhoto=itemView.findViewById(R.id.imageView_photo);
             cardView=itemView.findViewById(R.id.capsule_background);
 
