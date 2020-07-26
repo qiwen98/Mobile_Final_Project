@@ -36,8 +36,7 @@ public class TimeLineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_time_line_view_activity);
         setTitle("              Timeline");
         
-
-      setUpTimelineView();
+        setUpTimelineView();
 
         //Initialize and assign variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);

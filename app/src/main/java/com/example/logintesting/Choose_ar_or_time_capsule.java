@@ -22,6 +22,7 @@ public class Choose_ar_or_time_capsule extends AppCompatActivity implements View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_ar_or_time_capsule);
+        setTitle("Select Capsule Type");
 
         ButtonForAR=findViewById(R.id.TimeCapsuleBut);
         ButtonForTime=findViewById(R.id.ArCapsuleBut);

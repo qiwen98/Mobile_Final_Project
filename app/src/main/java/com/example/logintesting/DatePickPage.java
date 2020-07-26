@@ -42,6 +42,7 @@ public class DatePickPage extends AppCompatActivity implements  DatePickerDialog
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.datepicker);
+        setTitle("Select Date");
 
 
         Log.d(TAG, "onCreate: initialise sucessfully");
