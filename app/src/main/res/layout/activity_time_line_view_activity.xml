@@ -13,6 +13,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         />
+    <ImageView
+        android:layout_marginLeft="71dp"
+        android:layout_width="1.5dp"
+        android:layout_height="match_parent"
+        android:background="@color/grey"
+        android:alpha="0.5"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
