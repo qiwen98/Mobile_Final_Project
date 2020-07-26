@@ -39,7 +39,7 @@ public class TimeLineAdapter extends FirestoreRecyclerAdapter<TimeCapsule, TimeL
 
     private  Context context;
     private  List<TimeCapsule>timeCapsuleList,timeCapsuleFilteredList;
-    private List<String> receivers=new ArrayList<>();
+    private List<String> receiver=new ArrayList<>();
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
    // private final ObservableSnapshotArray<TimeCapsule> mSnapshots;
@@ -76,7 +76,7 @@ public class TimeLineAdapter extends FirestoreRecyclerAdapter<TimeCapsule, TimeL
         //TimeCapsule timeCapsule= pictureList.get(position);
 
         holder.timeline_text_time.setText(converttodate(model.getValidTimeStampForOpen()));
-        if(!model.getSender().isEmpty())
+        if(model.getReceiver()!=null)
         {
 
             holder.timeline_item_description.setText(setinfo(model.getReceiver(),model.getCapsuleType(),model.getValidTimeStampForOpen()));
@@ -118,7 +118,7 @@ public class TimeLineAdapter extends FirestoreRecyclerAdapter<TimeCapsule, TimeL
 
     }
 
-    private String setinfo(List<String>receivers ,String Capsuletype, Timestamp timestamp) {
+    private String setinfo(List<String> receivers ,String Capsuletype, Timestamp timestamp) {
 
         Date date=timestamp.toDate();
         DateFormat.getDateInstance(DateFormat.SHORT).format(date);
