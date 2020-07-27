@@ -54,18 +54,15 @@
 
     <Button
         android:id="@+id/Resend_code_but"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="411dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginEnd="244dp"
-        android:layout_marginBottom="164dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.753"
+        android:layout_width="346dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="42dp"
+        android:text="Verify"
+        android:background="@drawable/ciriclebutton"
+        app:layout_constraintTop_toBottomOf="@id/sign_out"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Verify_Msg_TextView"
         android:visibility="gone" />
 
     <EditText
