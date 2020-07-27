@@ -12,11 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="141dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="142dp"
-        android:layout_marginBottom="55dp"
+        android:layout_marginBottom="5dp"
         android:src="@mipmap/ic_launcher"
-        app:layout_constraintBottom_toTopOf="@+id/EmailView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -41,21 +40,17 @@
 
     <EditText
         android:id="@+id/EmailView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="63dp"
-        android:layout_marginEnd="93dp"
-        android:layout_marginBottom="24dp"
+        android:layout_width="346dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="240dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Email"
         android:background="@drawable/translucent"
-        app:layout_constraintBottom_toTopOf="@+id/NameView"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PhotoView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/Resend_code_but"
@@ -75,45 +70,39 @@
 
     <EditText
         android:id="@+id/NameView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="93dp"
-        android:layout_marginBottom="356dp"
+        android:layout_width="346dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
         android:background="@drawable/translucent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/EmailView"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EmailView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_navi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="348dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="50dp"
         android:text="Welcome"
         android:background="@drawable/ciriclebutton"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NameView"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/NameView"/>
 
     <Button
         android:id="@+id/sign_out"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="239dp"
-        android:layout_marginBottom="52dp"
+        android:layout_width="348dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="42dp"
         android:text="Signout"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/ciriclebutton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NameView" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_navi"
+        android:alpha="0.8"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

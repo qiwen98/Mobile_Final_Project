@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">TimeSuler</string>
+    <string name="app_name">Timesule</string>
     <string name="facebook_app_id">583505282305797</string>
     <string name="fb_login_protocol_scheme">fb583505282305797</string>
-    <string name="lorem_text">You have ...</string>
+    <string name="lorem_text">Have A Nice Day!</string>
     <string name="receiver_select">select</string>
     <string name="email_hint">Please enter your email</string>
     <string name="password">Please enter your password</string>

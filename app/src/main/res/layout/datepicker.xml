@@ -8,27 +8,26 @@
 
     <TextView
         android:id="@+id/textViewforSelectedDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="date Date"
-        android:textSize="30sp"
-
-        />
+        android:layout_width="348dp"
+        android:layout_height="50dp"
+        android:text="Please select a date"
+        android:textAlignment="center"
+        android:textSize="30sp" />
 
     <Button
         android:id="@+id/select_date_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/send_date_button"
+        android:layout_width="348dp"
+        android:layout_height="50dp"
         android:layout_below="@+id/textViewforSelectedDate"
-        android:layout_marginTop="107dp"
-        android:layout_marginBottom="115dp"
-        android:text="selectdate" />
+        android:layout_marginTop="150dp"
+        android:text="selectdate"
+        android:background="@drawable/ciriclebutton" />
 
     <Button
         android:id="@+id/send_date_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="348dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
         android:layout_centerVertical="true"
         android:text="send"
         android:background="@drawable/ciriclebutton"/>
