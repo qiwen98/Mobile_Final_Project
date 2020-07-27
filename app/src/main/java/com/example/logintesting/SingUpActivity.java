@@ -150,7 +150,7 @@ public class SingUpActivity extends AppCompatActivity {
                             }
                             else
                             {
-                                Uri path = Uri.parse("android.resource://com.example.logintesting/drawable/cashiconpng2");
+                                Uri path = Uri.parse("android.resource://com.example.logintesting/drawable/cashiconpng1");
                                 uploadImageToFireBase(path);
                                 
                             }
